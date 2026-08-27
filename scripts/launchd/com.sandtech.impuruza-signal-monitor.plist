@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sandtech.impuruza-signal-monitor</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Library/Developer/CommandLineTools/usr/bin/python3</string>
+        <string>/Users/uwonkundathierryrugira/NCDs/scripts/monitor_open_signals.py</string>
+    </array>
+
+    <!-- Every 5 minutes (300 seconds). launchd triggers this itself; the script
+         is single-shot (queries once and exits) rather than looping/sleeping,
+         so a crash or a stuck run doesn't accumulate - see project README. -->
+    <key>StartInterval</key>
+    <integer>300</integer>
+
+    <key>RunAtLoad</key>
+    <false/>
+
+    <!-- stdout now contains the full report INCLUDING reporter name/phone/address for
+         each open signal (see script's Privacy docstring). Discard it here rather than
+         letting launchd accumulate it in a plaintext file with default permissions -
+         the script already writes the same data to data/state/latest_open_signals.json,
+         which it chmods owner-only (0600) on every write. stderr only ever carries
+         operational error messages (no personal data), so it's safe to keep as a file. -->
+    <key>StandardOutPath</key>
+    <string>/dev/null</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/uwonkundathierryrugira/NCDs/data/logs/launchd.stderr.log</string>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/uwonkundathierryrugira/NCDs</string>
+
+    <!-- Optional: to scope this specific launchd job to one province instead of the whole
+         country, uncomment and set PROVINCE (overrides any Province= in .env). To run
+         separate jobs per province, copy this .plist with a different Label + PROVINCE
+         value for each. Valid values: National, East, Kigali City, North, South, West
+         (or the CR_Province-style names: Eastern, Kigali, Northern, Southern, Western). -->
+    <!--
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PROVINCE</key>
+        <string>National</string>
+    </dict>
+    -->
+</dict>
+</plist>

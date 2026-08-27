@@ -1,0 +1,483 @@
+{
+  "name": "Impuruza",
+  "programType": "WITH_REGISTRATION",
+  "trackedEntityType": {
+    "name": "Impuruza Person",
+    "id": "ZKs80w0rj8p"
+  },
+  "id": "oWvNtR6iP8p",
+  "programStages": [
+    {
+      "name": "Impuruza CEBS",
+      "programStageDataElements": [
+        {
+          "dataElement": {
+            "name": "CEB Status",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "CEB Status",
+              "id": "PWMy8I9QdOg"
+            },
+            "id": "DU6f0DR3t2t"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Durations (Hrs)",
+            "valueType": "INTEGER_ZERO_OR_POSITIVE",
+            "id": "RvP6KmcxFxd"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Last Date Updated",
+            "valueType": "DATE",
+            "id": "XQDTF5XA7Hr"
+          },
+          "compulsory": true
+        },
+        {
+          "dataElement": {
+            "name": "Auto Event ID",
+            "valueType": "TEXT",
+            "id": "te3YoG4XmCO"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "# CEB Cases",
+            "valueType": "INTEGER_ZERO_OR_POSITIVE",
+            "id": "gRi3KDFSAeO"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Age in years",
+            "valueType": "NUMBER",
+            "id": "p4qzaVPu7aR"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Cvirus_Sex",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "Gender",
+              "id": "WNqjeSlrS3r"
+            },
+            "id": "p8OD4J1wQ3t"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Disease eCBS",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "Disease",
+              "id": "ADQhuzGAauC"
+            },
+            "id": "BHaSNB8TwzI"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Risk of stock out",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "Risk of stock out",
+              "id": "XlNQACya8Jk"
+            },
+            "id": "TMiKSx8Qp8e"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Stock out",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "Stock out",
+              "id": "u4LCTb5umvR"
+            },
+            "id": "Odx0mbM3fa4"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "# Malaria Cases",
+            "valueType": "INTEGER_ZERO_OR_POSITIVE",
+            "id": "B84KCmNtKPl"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Triage",
+            "valueType": "TEXT",
+            "id": "FR9D8oOmoLy"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Duplication Status",
+            "valueType": "TEXT",
+            "id": "Ks6b3QTpGsx"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Signal Verification Outcome",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "Signal Verification",
+              "id": "u6DycA2BPZS"
+            },
+            "id": "bqqqkWc73MG"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Cell",
+            "valueType": "TEXT",
+            "id": "zljZwAjDIWY"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Country",
+            "valueType": "TEXT",
+            "id": "Vxr5Iw5IsBy"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Department of Accurence",
+            "valueType": "LONG_TEXT",
+            "id": "Y5X0kf5ns0l"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_District",
+            "valueType": "TEXT",
+            "id": "VEWW2mKGUO8"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Is the event ongoing as at the time of this report?",
+            "valueType": "TEXT",
+            "id": "dEgtX78nwRB"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Province",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "CR_Province",
+              "id": "elGSJDlYTNm"
+            },
+            "id": "fEign7fyWz4"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Sector",
+            "valueType": "TEXT",
+            "id": "sMlRS2gjIgc"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Signal Description",
+            "valueType": "LONG_TEXT",
+            "id": "jCqHjn8KRqv"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Source of Information",
+            "valueType": "TEXT",
+            "id": "ngO89eTcOUg"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Type of Species",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "OH AH ATT Species",
+              "id": "UbZxCfa0p6O"
+            },
+            "id": "gx8WIi4FZ55"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Village",
+            "valueType": "TEXT",
+            "id": "NjYXU7NlXcY"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_What action has been taken?",
+            "valueType": "TEXT",
+            "id": "MnBfsZG88yV"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_When the event started?",
+            "valueType": "DATETIME",
+            "id": "b5RFoulqvNG"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_when the event was detected?",
+            "valueType": "DATETIME",
+            "id": "bDEZWxmlRSp"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Date of signal verification",
+            "valueType": "DATETIME",
+            "id": "yNqYuOn39et"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Describe the event",
+            "valueType": "LONG_TEXT",
+            "id": "xKo8Xm1E8KY"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_EBS Type",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "EBS Type",
+              "id": "cMIuCcliWhv"
+            },
+            "id": "OEVkQ1ds77r"
+          },
+          "compulsory": true
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Immediate Action",
+            "valueType": "LONG_TEXT",
+            "id": "EbPIRusPDNG"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Does the information meet a pre-defined signal?",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "YesNo",
+              "id": "aqXCq1Vb4yE"
+            },
+            "id": "PWPBNY2Dd4j"
+          },
+          "compulsory": true
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Is the signal a duplicate?",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "YesNo",
+              "id": "aqXCq1Vb4yE"
+            },
+            "id": "VfwVRwtF2PG"
+          },
+          "compulsory": true
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Is the signal a rumor?",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "YesNo",
+              "id": "aqXCq1Vb4yE"
+            },
+            "id": "WlVgQGVUNrL"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Number of Deaths",
+            "valueType": "NUMBER",
+            "id": "HTsBBamgqWw"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Number of affected Animals",
+            "valueType": "NUMBER",
+            "id": "V3pskbLq3tm"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Where did the event happen? ",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "countries",
+              "id": "xoEXmPu0d0x"
+            },
+            "id": "tQc2yoxa6qt"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Animal Disease",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "OH AH CC List Of Diseases",
+              "id": "GjUB2pHlTNF"
+            },
+            "id": "OZ7Cd2q0CKV"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Actual Date of signal verification",
+            "valueType": "DATETIME",
+            "id": "UyCw21lYDvp"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza Signal Notified",
+            "valueType": "TEXT",
+            "optionSet": {
+              "name": "Signal Trigger",
+              "id": "P6bU0QEEMSL"
+            },
+            "id": "xm3RTn3tkw1"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Date of Triage",
+            "valueType": "DATETIME",
+            "id": "KGbTWoZ9bJs"
+          },
+          "compulsory": false
+        },
+        {
+          "dataElement": {
+            "name": "Impuruza_Number of affected People",
+            "valueType": "NUMBER",
+            "id": "D1fWQyAxLIR"
+          },
+          "compulsory": false
+        }
+      ],
+      "id": "AXUtIJGHw0H"
+    }
+  ],
+  "programTrackedEntityAttributes": [
+    {
+      "displayInList": true,
+      "sortOrder": 1,
+      "mandatory": true,
+      "trackedEntityAttribute": {
+        "name": "Lookout Names",
+        "valueType": "TEXT",
+        "id": "Yhh6dcSSvh3"
+      }
+    },
+    {
+      "displayInList": true,
+      "sortOrder": 2,
+      "mandatory": true,
+      "trackedEntityAttribute": {
+        "name": "Mobile number",
+        "valueType": "PHONE_NUMBER",
+        "id": "E7u9XdW24SP"
+      }
+    },
+    {
+      "displayInList": true,
+      "sortOrder": 3,
+      "mandatory": false,
+      "trackedEntityAttribute": {
+        "name": "Province ",
+        "valueType": "ORGANISATION_UNIT",
+        "id": "RS5UJYqho6y"
+      }
+    },
+    {
+      "displayInList": true,
+      "sortOrder": 4,
+      "mandatory": false,
+      "trackedEntityAttribute": {
+        "name": "District",
+        "valueType": "ORGANISATION_UNIT",
+        "id": "yvkYfTjxEJU"
+      }
+    },
+    {
+      "displayInList": true,
+      "sortOrder": 5,
+      "mandatory": false,
+      "trackedEntityAttribute": {
+        "name": "Sector (Residence)",
+        "valueType": "ORGANISATION_UNIT",
+        "id": "iBB5ejHjJbC"
+      }
+    },
+    {
+      "displayInList": true,
+      "sortOrder": 6,
+      "mandatory": false,
+      "trackedEntityAttribute": {
+        "name": "Village/Address",
+        "valueType": "TEXT",
+        "id": "v24me96F6XA"
+      }
+    }
+  ]
+}

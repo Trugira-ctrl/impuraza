@@ -1,0 +1,18 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Raw API pulls can contain personal data (names, phone numbers) - never commit these
+data/samples/
+data/raw/
+*.pii.json
+
+# Operational/transient state and logs from monitor_open_signals.py
+data/state/
+data/logs/
+
+# Postman environment holds real credentials once you fill it in (the committed copy
+# is a blank template) - re-exporting from Postman would overwrite it with real values
+postman/Impuruza.postman_environment.json

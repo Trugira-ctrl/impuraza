@@ -1,0 +1,39 @@
+{
+  "organisationUnitLevels": [
+    {
+      "name": "National",
+      "level": 1,
+      "id": "H30zzhwM4cJ"
+    },
+    {
+      "name": "Province",
+      "level": 2,
+      "id": "W1nXTBeYY9L"
+    },
+    {
+      "name": "District",
+      "level": 3,
+      "id": "OkbCqrGL982"
+    },
+    {
+      "name": "Sub District",
+      "level": 4,
+      "id": "oWZTO843UuV"
+    },
+    {
+      "name": "Sector",
+      "level": 5,
+      "id": "cJJZXs76UZT"
+    },
+    {
+      "name": "Facilities",
+      "level": 6,
+      "id": "jcbpUWLiqJe"
+    },
+    {
+      "name": "Villages",
+      "level": 7,
+      "id": "kYijHFzFFZx"
+    }
+  ]
+}

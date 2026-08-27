@@ -1,0 +1,2072 @@
+{
+  "CEB Status": {
+    "name": "CEB Status",
+    "options": [
+      {
+        "code": "Indwara_ikekwa",
+        "name": "Indwara ikekwa"
+      },
+      {
+        "code": "Indwara_yemejwe",
+        "name": "Indwara yemejwe"
+      },
+      {
+        "code": "Impuruza_itariyo",
+        "name": "Impuruza Itariyo"
+      },
+      {
+        "code": "Indwara_yakekwaga_yahagaze",
+        "name": "Indwara yakekwaga yahagaze"
+      },
+      {
+        "code": "impuruza_yemejwe",
+        "name": "Impuruza Yemejwe"
+      }
+    ],
+    "id": "PWMy8I9QdOg"
+  },
+  "Gender": {
+    "name": "Gender",
+    "options": [
+      {
+        "code": "Male",
+        "name": "Male"
+      },
+      {
+        "code": "Female",
+        "name": "Female"
+      }
+    ],
+    "id": "WNqjeSlrS3r"
+  },
+  "Disease": {
+    "name": "Disease",
+    "options": [
+      {
+        "code": "Acute Flaccid Paralysis",
+        "name": "Acute Flaccid Paralysis"
+      },
+      {
+        "code": "Anthrax",
+        "name": "Anthrax"
+      },
+      {
+        "code": "Meningococal Meningitis",
+        "name": "Bacterial Meningitis"
+      },
+      {
+        "code": "Bloody Diarrhea (Shigellosis)",
+        "name": "Bloody Diarrhea"
+      },
+      {
+        "code": "Chicken Pox",
+        "name": "Chicken Pox"
+      },
+      {
+        "code": "Chikungunya",
+        "name": "Chikungunya"
+      },
+      {
+        "code": "Cholera",
+        "name": "Cholera"
+      },
+      {
+        "code": "Dengue",
+        "name": "Dengue"
+      },
+      {
+        "code": "Diarrhoea - non bloody",
+        "name": "Diarrhoea - non bloody"
+      },
+      {
+        "code": "Diphteria",
+        "name": "Diphteria"
+      },
+      {
+        "code": "Dracunculiasis",
+        "name": "Dracunculiasis"
+      },
+      {
+        "code": "Epidemic Typhus",
+        "name": "Epidemic Typhus"
+      },
+      {
+        "code": "Flu syndrome",
+        "name": "Flu syndrome"
+      },
+      {
+        "code": "Food Poisoning",
+        "name": "Foodborne illnesses"
+      },
+      {
+        "code": "Human influenza",
+        "name": "Human influenza due to a new subtype"
+      },
+      {
+        "code": "Human Rabies",
+        "name": "Human Rabies"
+      },
+      {
+        "code": "Malaria Death",
+        "name": "Malaria Death"
+      },
+      {
+        "code": "Maternal death",
+        "name": "Maternal death"
+      },
+      {
+        "code": "Measle Rubella",
+        "name": "Measle Rubella"
+      },
+      {
+        "code": "Measles",
+        "name": "Measles"
+      },
+      {
+        "code": "Monkey  pox",
+        "name": "Monkey  pox"
+      },
+      {
+        "code": "Mumps",
+        "name": "Mumps"
+      },
+      {
+        "code": "Neonatal Tetanus",
+        "name": "Neonatal Tetanus"
+      },
+      {
+        "code": "Perinatal death",
+        "name": "Perinatal death"
+      },
+      {
+        "code": "Plague",
+        "name": "Plague"
+      },
+      {
+        "code": "Public health event",
+        "name": "Public health event of international or national concern"
+      },
+      {
+        "code": "Rabies",
+        "name": "Rabies"
+      },
+      {
+        "code": "Rift Valley",
+        "name": "Rift Valley Fever"
+      },
+      {
+        "code": "Rubella",
+        "name": "Rubella"
+      },
+      {
+        "code": "SARI",
+        "name": "SARI"
+      },
+      {
+        "code": "SARS",
+        "name": "SARS"
+      },
+      {
+        "code": "Malaria",
+        "name": "Severe malaria"
+      },
+      {
+        "code": "Pneumonia Severe",
+        "name": "Severe pneumonia"
+      },
+      {
+        "code": "Smallpox",
+        "name": "Smallpox"
+      },
+      {
+        "code": "Snake",
+        "name": "Snake bite"
+      },
+      {
+        "code": "Typhoid Fever",
+        "name": "Typhoid Fever"
+      },
+      {
+        "code": "Under 5 years death",
+        "name": "Under 5 years death"
+      },
+      {
+        "code": "Unknown disease",
+        "name": "Unknown disease"
+      },
+      {
+        "code": "Viral Conjunctivitis",
+        "name": "Viral Conjunctivitis"
+      },
+      {
+        "code": "Viral hemorrhagic fever",
+        "name": "Viral hemorrhagic fever"
+      },
+      {
+        "code": "Whooping Cough",
+        "name": "Whooping Cough"
+      },
+      {
+        "code": "Yaws",
+        "name": "Yaws or endemic syphilis or bejel"
+      },
+      {
+        "code": "Yellow Fever",
+        "name": "Yellow Fever"
+      },
+      {
+        "code": "Zika",
+        "name": "Zika"
+      }
+    ],
+    "id": "ADQhuzGAauC"
+  },
+  "Risk of stock out": {
+    "name": "Risk of stock out",
+    "options": [
+      {
+        "code": "1",
+        "name": "Yego"
+      },
+      {
+        "code": "0",
+        "name": "Oya"
+      }
+    ],
+    "id": "XlNQACya8Jk"
+  },
+  "Stock out": {
+    "name": "Stock out",
+    "options": [
+      {
+        "code": "1",
+        "name": "Yego"
+      },
+      {
+        "code": "0",
+        "name": "Oya"
+      }
+    ],
+    "id": "u4LCTb5umvR"
+  },
+  "Signal Verification": {
+    "name": "Signal Verification",
+    "options": [
+      {
+        "code": "Confirmed ",
+        "name": "Confirmed"
+      },
+      {
+        "code": "Discarded",
+        "name": "Discarded"
+      }
+    ],
+    "id": "u6DycA2BPZS"
+  },
+  "CR_Province": {
+    "name": "CR_Province",
+    "options": [
+      {
+        "code": "10",
+        "name": "KIGALI"
+      },
+      {
+        "code": "20",
+        "name": "SOUTHERN"
+      },
+      {
+        "code": "30",
+        "name": "WESTERN"
+      },
+      {
+        "code": "40",
+        "name": "NORTHERN"
+      },
+      {
+        "code": "50",
+        "name": "EASTERN"
+      }
+    ],
+    "id": "elGSJDlYTNm"
+  },
+  "OH AH ATT Species": {
+    "name": "OH AH ATT Species",
+    "options": [
+      {
+        "code": "Bees",
+        "name": "Bees"
+      },
+      {
+        "code": "Soldier",
+        "name": "Black Soldier"
+      },
+      {
+        "code": "Camel",
+        "name": "Camel"
+      },
+      {
+        "code": "Cat",
+        "name": "Cat"
+      },
+      {
+        "code": "Cattle",
+        "name": "Cattle"
+      },
+      {
+        "code": "Chicken",
+        "name": "Chicken"
+      },
+      {
+        "code": "Quail",
+        "name": "Common Quail"
+      },
+      {
+        "code": "Dog",
+        "name": "Dog"
+      },
+      {
+        "code": "Donkey",
+        "name": "Donkey"
+      },
+      {
+        "code": "Duck",
+        "name": "Duck"
+      },
+      {
+        "code": "Fish",
+        "name": "Fish"
+      },
+      {
+        "code": "Goat",
+        "name": "Goat"
+      },
+      {
+        "code": "Guinea",
+        "name": "Guinea Pig"
+      },
+      {
+        "code": "Horse",
+        "name": "Horse"
+      },
+      {
+        "code": "Pig",
+        "name": "Pig"
+      },
+      {
+        "code": "Rabbit",
+        "name": "Rabbit"
+      },
+      {
+        "code": "Sheep",
+        "name": "Sheep"
+      },
+      {
+        "code": "Silkworm",
+        "name": "Silkworm"
+      },
+      {
+        "code": "Turkey",
+        "name": "Turkey"
+      },
+      {
+        "code": "Other",
+        "name": "Other"
+      }
+    ],
+    "id": "UbZxCfa0p6O"
+  },
+  "EBS Type": {
+    "name": "EBS Type",
+    "options": [
+      {
+        "code": "AnimalHealth",
+        "name": "Animal Health"
+      },
+      {
+        "code": "Community",
+        "name": "Community"
+      },
+      {
+        "code": "HealthFacility",
+        "name": "Health Facility"
+      },
+      {
+        "code": "Hotline",
+        "name": "Hotline"
+      },
+      {
+        "code": "Laboratory",
+        "name": "Laboratory"
+      },
+      {
+        "code": "MediaScanning",
+        "name": "Media Scanning"
+      },
+      {
+        "code": "Schools",
+        "name": "Schools"
+      },
+      {
+        "code": "PoE",
+        "name": "PoE"
+      },
+      {
+        "code": "Environment Facility",
+        "name": "Environmental Facility"
+      },
+      {
+        "code": "Pharmacy",
+        "name": "Pharmacy"
+      },
+      {
+        "code": "MiningSites",
+        "name": "Mining Sites"
+      }
+    ],
+    "id": "cMIuCcliWhv"
+  },
+  "YesNo": {
+    "name": "YesNo",
+    "options": [
+      {
+        "code": "Yes",
+        "name": "Yes"
+      },
+      {
+        "code": "No",
+        "name": "No"
+      }
+    ],
+    "id": "aqXCq1Vb4yE"
+  },
+  "countries": {
+    "name": "countries",
+    "options": [
+      {
+        "code": "AFG",
+        "name": "Afghanistan"
+      },
+      {
+        "code": "ALA",
+        "name": "Aland Islands"
+      },
+      {
+        "code": "ALB",
+        "name": "Albania"
+      },
+      {
+        "code": "DZA",
+        "name": "Algeria"
+      },
+      {
+        "code": "ASM",
+        "name": "American Samoa"
+      },
+      {
+        "code": "AND",
+        "name": "Andorra"
+      },
+      {
+        "code": "AGO",
+        "name": "Angola"
+      },
+      {
+        "code": "AIA",
+        "name": "Anguilla"
+      },
+      {
+        "code": "ATA",
+        "name": "Antarctica"
+      },
+      {
+        "code": "ATG",
+        "name": "Antigua and Barbuda"
+      },
+      {
+        "code": "ARG",
+        "name": "Argentina"
+      },
+      {
+        "code": "ARM",
+        "name": "Armenia"
+      },
+      {
+        "code": "ABW",
+        "name": "Aruba"
+      },
+      {
+        "code": "AUS",
+        "name": "Australia"
+      },
+      {
+        "code": "AUT",
+        "name": "Austria"
+      },
+      {
+        "code": "AZE",
+        "name": "Azerbaijan"
+      },
+      {
+        "code": "BHS",
+        "name": "Bahamas"
+      },
+      {
+        "code": "BHR",
+        "name": "Bahrain"
+      },
+      {
+        "code": "BGD",
+        "name": "Bangladesh"
+      },
+      {
+        "code": "BRB",
+        "name": "Barbados"
+      },
+      {
+        "code": "BLR",
+        "name": "Belarus"
+      },
+      {
+        "code": "BEL",
+        "name": "Belgium"
+      },
+      {
+        "code": "BLZ",
+        "name": "Belize"
+      },
+      {
+        "code": "BEN",
+        "name": "Benin"
+      },
+      {
+        "code": "BMU",
+        "name": "Bermuda"
+      },
+      {
+        "code": "BTN",
+        "name": "Bhutan"
+      },
+      {
+        "code": "BOL",
+        "name": "Bolivia"
+      },
+      {
+        "code": "BIH",
+        "name": "Bosnia and Herzegovina"
+      },
+      {
+        "code": "BWA",
+        "name": "Botswana"
+      },
+      {
+        "code": "BVT",
+        "name": "Bouvet Island"
+      },
+      {
+        "code": "BRA",
+        "name": "Brazil"
+      },
+      {
+        "code": "IOT",
+        "name": "British Indian Ocean Territory"
+      },
+      {
+        "code": "VGB",
+        "name": "British Virgin Islands"
+      },
+      {
+        "code": "BRN",
+        "name": "Brunei Darussalam"
+      },
+      {
+        "code": "BGR",
+        "name": "Bulgaria"
+      },
+      {
+        "code": "BFA",
+        "name": "Burkina Faso"
+      },
+      {
+        "code": "BDI",
+        "name": "Burundi"
+      },
+      {
+        "code": "KHM",
+        "name": "Cambodia"
+      },
+      {
+        "code": "CMR",
+        "name": "Cameroon"
+      },
+      {
+        "code": "CAN",
+        "name": "Canada"
+      },
+      {
+        "code": "CPV",
+        "name": "Cape Verde"
+      },
+      {
+        "code": "CYM",
+        "name": "Cayman Islands"
+      },
+      {
+        "code": "CAF",
+        "name": "Central African Republic"
+      },
+      {
+        "code": "TCD",
+        "name": "Chad"
+      },
+      {
+        "code": "CHL",
+        "name": "Chile"
+      },
+      {
+        "code": "CHN",
+        "name": "China"
+      },
+      {
+        "code": "CXR",
+        "name": "Christmas Island"
+      },
+      {
+        "code": "CCK",
+        "name": "Cocos (Keeling) Islands"
+      },
+      {
+        "code": "COL",
+        "name": "Colombia"
+      },
+      {
+        "code": "COM",
+        "name": "Comoros"
+      },
+      {
+        "code": "COG",
+        "name": "Congo\u00a0(Brazzaville)"
+      },
+      {
+        "code": "COD",
+        "name": "DRC"
+      },
+      {
+        "code": "COK",
+        "name": "Cook Islands"
+      },
+      {
+        "code": "CRI",
+        "name": "Costa Rica"
+      },
+      {
+        "code": "CIV",
+        "name": "C\u00f4te d`Ivoire"
+      },
+      {
+        "code": "HRV",
+        "name": "Croatia"
+      },
+      {
+        "code": "CUB",
+        "name": "Cuba"
+      },
+      {
+        "code": "CYP",
+        "name": "Cyprus"
+      },
+      {
+        "code": "CZE",
+        "name": "Czech Republic"
+      },
+      {
+        "code": "DNK",
+        "name": "Denmark"
+      },
+      {
+        "code": "DJI",
+        "name": "Djibouti"
+      },
+      {
+        "code": "DMA",
+        "name": "Dominica"
+      },
+      {
+        "code": "DOM",
+        "name": "Dominican Republic"
+      },
+      {
+        "code": "ECU",
+        "name": "Ecuador"
+      },
+      {
+        "code": "EGY",
+        "name": "Egypt"
+      },
+      {
+        "code": "SLV",
+        "name": "El Salvador"
+      },
+      {
+        "code": "GNQ",
+        "name": "Equatorial Guinea"
+      },
+      {
+        "code": "ERI",
+        "name": "Eritrea"
+      },
+      {
+        "code": "EST",
+        "name": "Estonia"
+      },
+      {
+        "code": "ETH",
+        "name": "Ethiopia"
+      },
+      {
+        "code": "FLK",
+        "name": "Falkland Islands (Malvinas)"
+      },
+      {
+        "code": "FRO",
+        "name": "Faroe Islands"
+      },
+      {
+        "code": "FJI",
+        "name": "Fiji"
+      },
+      {
+        "code": "FIN",
+        "name": "Finland"
+      },
+      {
+        "code": "FRA",
+        "name": "France"
+      },
+      {
+        "code": "GUF",
+        "name": "French Guiana"
+      },
+      {
+        "code": "PYF",
+        "name": "French Polynesia"
+      },
+      {
+        "code": "ATF",
+        "name": "French Southern Territories"
+      },
+      {
+        "code": "GAB",
+        "name": "Gabon"
+      },
+      {
+        "code": "GMB",
+        "name": "Gambia"
+      },
+      {
+        "code": "GEO",
+        "name": "Georgia"
+      },
+      {
+        "code": "DEU",
+        "name": "Germany"
+      },
+      {
+        "code": "GHA",
+        "name": "Ghana"
+      },
+      {
+        "code": "GIB",
+        "name": "Gibraltar"
+      },
+      {
+        "code": "GRC",
+        "name": "Greece"
+      },
+      {
+        "code": "GRL",
+        "name": "Greenland"
+      },
+      {
+        "code": "GRD",
+        "name": "Grenada"
+      },
+      {
+        "code": "GLP",
+        "name": "Guadeloupe"
+      },
+      {
+        "code": "GUM",
+        "name": "Guam"
+      },
+      {
+        "code": "GTM",
+        "name": "Guatemala"
+      },
+      {
+        "code": "GGY",
+        "name": "Guernsey"
+      },
+      {
+        "code": "GIN",
+        "name": "Guinea"
+      },
+      {
+        "code": "GNB",
+        "name": "Guinea-Bissau"
+      },
+      {
+        "code": "GUY",
+        "name": "Guyana"
+      },
+      {
+        "code": "HTI",
+        "name": "Haiti"
+      },
+      {
+        "code": "HMD",
+        "name": "Heard and Mcdonald Islands"
+      },
+      {
+        "code": "VAT",
+        "name": "Holy See\u00a0(Vatican City State)"
+      },
+      {
+        "code": "HND",
+        "name": "Honduras"
+      },
+      {
+        "code": "HKG",
+        "name": "Hong Kong, SAR China"
+      },
+      {
+        "code": "HUN",
+        "name": "Hungary"
+      },
+      {
+        "code": "ISL",
+        "name": "Iceland"
+      },
+      {
+        "code": "IND",
+        "name": "India"
+      },
+      {
+        "code": "IDN",
+        "name": "Indonesia"
+      },
+      {
+        "code": "IRN",
+        "name": "Iran, Islamic Republic of"
+      },
+      {
+        "code": "IRQ",
+        "name": "Iraq"
+      },
+      {
+        "code": "IRL",
+        "name": "Ireland"
+      },
+      {
+        "code": "IMN",
+        "name": "Isle of Man"
+      },
+      {
+        "code": "ISR",
+        "name": "Israel"
+      },
+      {
+        "code": "ITA",
+        "name": "Italy"
+      },
+      {
+        "code": "JAM",
+        "name": "Jamaica"
+      },
+      {
+        "code": "JPN",
+        "name": "Japan"
+      },
+      {
+        "code": "JEY",
+        "name": "Jersey"
+      },
+      {
+        "code": "JOR",
+        "name": "Jordan"
+      },
+      {
+        "code": "KAZ",
+        "name": "Kazakhstan"
+      },
+      {
+        "code": "KEN",
+        "name": "Kenya"
+      },
+      {
+        "code": "KIR",
+        "name": "Kiribati"
+      },
+      {
+        "code": "PRK",
+        "name": "Korea\u00a0(North)"
+      },
+      {
+        "code": "KOR",
+        "name": "Korea\u00a0(South)"
+      },
+      {
+        "code": "KWT",
+        "name": "Kuwait"
+      },
+      {
+        "code": "KGZ",
+        "name": "Kyrgyzstan"
+      },
+      {
+        "code": "LAO",
+        "name": "Lao PDR"
+      },
+      {
+        "code": "LVA",
+        "name": "Latvia"
+      },
+      {
+        "code": "LBN",
+        "name": "Lebanon"
+      },
+      {
+        "code": "LSO",
+        "name": "Lesotho"
+      },
+      {
+        "code": "LBR",
+        "name": "Liberia"
+      },
+      {
+        "code": "LBY",
+        "name": "Libya"
+      },
+      {
+        "code": "LIE",
+        "name": "Liechtenstein"
+      },
+      {
+        "code": "LTU",
+        "name": "Lithuania"
+      },
+      {
+        "code": "LUX",
+        "name": "Luxembourg"
+      },
+      {
+        "code": "MAC",
+        "name": "Macao, SAR China"
+      },
+      {
+        "code": "MKD",
+        "name": "Macedonia, Republic of"
+      },
+      {
+        "code": "MDG",
+        "name": "Madagascar"
+      },
+      {
+        "code": "MWI",
+        "name": "Malawi"
+      },
+      {
+        "code": "MYS",
+        "name": "Malaysia"
+      },
+      {
+        "code": "MDV",
+        "name": "Maldives"
+      },
+      {
+        "code": "MLI",
+        "name": "Mali"
+      },
+      {
+        "code": "MLT",
+        "name": "Malta"
+      },
+      {
+        "code": "MHL",
+        "name": "Marshall Islands"
+      },
+      {
+        "code": "MTQ",
+        "name": "Martinique"
+      },
+      {
+        "code": "MRT",
+        "name": "Mauritania"
+      },
+      {
+        "code": "MUS",
+        "name": "Mauritius"
+      },
+      {
+        "code": "MYT",
+        "name": "Mayotte"
+      },
+      {
+        "code": "MEX",
+        "name": "Mexico"
+      },
+      {
+        "code": "FSM",
+        "name": "Micronesia, Federated States of"
+      },
+      {
+        "code": "MDA",
+        "name": "Moldova"
+      },
+      {
+        "code": "MCO",
+        "name": "Monaco"
+      },
+      {
+        "code": "MNG",
+        "name": "Mongolia"
+      },
+      {
+        "code": "MNE",
+        "name": "Montenegro"
+      },
+      {
+        "code": "MSR",
+        "name": "Montserrat"
+      },
+      {
+        "code": "MAR",
+        "name": "Morocco"
+      },
+      {
+        "code": "MMR",
+        "name": "Myanmar"
+      },
+      {
+        "code": "NAM",
+        "name": "Namibia"
+      },
+      {
+        "code": "NRU",
+        "name": "Nauru"
+      },
+      {
+        "code": "NPL",
+        "name": "Nepal"
+      },
+      {
+        "code": "NLD",
+        "name": "Netherlands"
+      },
+      {
+        "code": "ANT",
+        "name": "Netherlands Antilles"
+      },
+      {
+        "code": "NCL",
+        "name": "New Caledonia"
+      },
+      {
+        "code": "NZL",
+        "name": "New Zealand"
+      },
+      {
+        "code": "NIC",
+        "name": "Nicaragua"
+      },
+      {
+        "code": "MOZ",
+        "name": "Mozambique"
+      },
+      {
+        "code": "NGA",
+        "name": "Nigeria"
+      },
+      {
+        "code": "NIU",
+        "name": "Niue"
+      },
+      {
+        "code": "NFK",
+        "name": "Norfolk Island"
+      },
+      {
+        "code": "MNP",
+        "name": "Northern Mariana Islands"
+      },
+      {
+        "code": "NOR",
+        "name": "Norway"
+      },
+      {
+        "code": "OMN",
+        "name": "Oman"
+      },
+      {
+        "code": "PAK",
+        "name": "Pakistan"
+      },
+      {
+        "code": "PLW",
+        "name": "Palau"
+      },
+      {
+        "code": "PSE",
+        "name": "Palestinian Territory"
+      },
+      {
+        "code": "PAN",
+        "name": "Panama"
+      },
+      {
+        "code": "PNG",
+        "name": "Papua New Guinea"
+      },
+      {
+        "code": "PRY",
+        "name": "Paraguay"
+      },
+      {
+        "code": "PER",
+        "name": "Peru"
+      },
+      {
+        "code": "PHL",
+        "name": "Philippines"
+      },
+      {
+        "code": "PCN",
+        "name": "Pitcairn"
+      },
+      {
+        "code": "POL",
+        "name": "Poland"
+      },
+      {
+        "code": "PRT",
+        "name": "Portugal"
+      },
+      {
+        "code": "PRI",
+        "name": "Puerto Rico"
+      },
+      {
+        "code": "QAT",
+        "name": "Qatar"
+      },
+      {
+        "code": "REU",
+        "name": "R\u00e9union"
+      },
+      {
+        "code": "ROU",
+        "name": "Romania"
+      },
+      {
+        "code": "RUS",
+        "name": "Russian Federation"
+      },
+      {
+        "code": "RWA",
+        "name": "Rwanda"
+      },
+      {
+        "code": "SHN",
+        "name": "Saint Helena"
+      },
+      {
+        "code": "KNA",
+        "name": "Saint Kitts and Nevis"
+      },
+      {
+        "code": "LCA",
+        "name": "Saint Lucia"
+      },
+      {
+        "code": "SPM",
+        "name": "Saint Pierre and Miquelon"
+      },
+      {
+        "code": "VCT",
+        "name": "Saint Vincent and Grenadines"
+      },
+      {
+        "code": "BLM",
+        "name": "Saint-Barth\u00e9lemy"
+      },
+      {
+        "code": "MAF",
+        "name": "Saint-Martin (French part)"
+      },
+      {
+        "code": "WSM",
+        "name": "Samoa"
+      },
+      {
+        "code": "SMR",
+        "name": "San Marino"
+      },
+      {
+        "code": "STP",
+        "name": "Sao Tome and Principe"
+      },
+      {
+        "code": "SAU",
+        "name": "Saudi Arabia"
+      },
+      {
+        "code": "SEN",
+        "name": "Senegal"
+      },
+      {
+        "code": "SRB",
+        "name": "Serbia"
+      },
+      {
+        "code": "SYC",
+        "name": "Seychelles"
+      },
+      {
+        "code": "SLE",
+        "name": "Sierra Leone"
+      },
+      {
+        "code": "SGP",
+        "name": "Singapore"
+      },
+      {
+        "code": "SVK",
+        "name": "Slovakia"
+      },
+      {
+        "code": "SVN",
+        "name": "Slovenia"
+      },
+      {
+        "code": "SLB",
+        "name": "Solomon Islands"
+      },
+      {
+        "code": "SOM",
+        "name": "Somalia"
+      },
+      {
+        "code": "ZAF",
+        "name": "South Africa"
+      },
+      {
+        "code": "SGS",
+        "name": "South Georgia and the South Sandwich Islands"
+      },
+      {
+        "code": "SSD",
+        "name": "South Sudan"
+      },
+      {
+        "code": "ESP",
+        "name": "Spain"
+      },
+      {
+        "code": "LKA",
+        "name": "Sri Lanka"
+      },
+      {
+        "code": "SDN",
+        "name": "Sudan"
+      },
+      {
+        "code": "SUR",
+        "name": "Suriname"
+      },
+      {
+        "code": "SJM",
+        "name": "Svalbard and Jan Mayen Islands"
+      },
+      {
+        "code": "SWZ",
+        "name": "Swaziland"
+      },
+      {
+        "code": "SWE",
+        "name": "Sweden"
+      },
+      {
+        "code": "CHE",
+        "name": "Switzerland"
+      },
+      {
+        "code": "SYR",
+        "name": "Syrian Arab Republic\u00a0(Syria)"
+      },
+      {
+        "code": "TWN",
+        "name": "Taiwan_ Republic of China"
+      },
+      {
+        "code": "TJK",
+        "name": "Tajikistan"
+      },
+      {
+        "code": "TZA",
+        "name": "Tanzania_ United Republic of"
+      },
+      {
+        "code": "THA",
+        "name": "Thailand"
+      },
+      {
+        "code": "TLS",
+        "name": "Timor-Leste"
+      },
+      {
+        "code": "TGO",
+        "name": "Togo"
+      },
+      {
+        "code": "TKL",
+        "name": "Tokelau"
+      },
+      {
+        "code": "TON",
+        "name": "Tonga"
+      },
+      {
+        "code": "TTO",
+        "name": "Trinidad and Tobago"
+      },
+      {
+        "code": "TUN",
+        "name": "Tunisia"
+      },
+      {
+        "code": "TUR",
+        "name": "Turkey"
+      },
+      {
+        "code": "TKM",
+        "name": "Turkmenistan"
+      },
+      {
+        "code": "TCA",
+        "name": "Turks and Caicos Islands"
+      },
+      {
+        "code": "TUV",
+        "name": "Tuvalu"
+      },
+      {
+        "code": "UGA",
+        "name": "Uganda"
+      },
+      {
+        "code": "UKR",
+        "name": "Ukraine"
+      },
+      {
+        "code": "ARE",
+        "name": "United Arab Emirates"
+      },
+      {
+        "code": "GBR",
+        "name": "United Kingdom"
+      },
+      {
+        "code": "USA",
+        "name": "United States of America"
+      },
+      {
+        "code": "URY",
+        "name": "Uruguay"
+      },
+      {
+        "code": "UMI",
+        "name": "US Minor Outlying Islands"
+      },
+      {
+        "code": "UZB",
+        "name": "Uzbekistan"
+      },
+      {
+        "code": "VUT",
+        "name": "Vanuatu"
+      },
+      {
+        "code": "VEN",
+        "name": "Venezuela\u00a0(Bolivarian Republic)"
+      },
+      {
+        "code": "VNM",
+        "name": "Viet Nam"
+      },
+      {
+        "code": "VIR",
+        "name": "Virgin Islands_ US"
+      },
+      {
+        "code": "WLF",
+        "name": "Wallis and Futuna Islands"
+      },
+      {
+        "code": "ESH",
+        "name": "Western Sahara"
+      },
+      {
+        "code": "YEM",
+        "name": "Yemen"
+      },
+      {
+        "code": "ZMB",
+        "name": "Zambia"
+      },
+      {
+        "code": "ZWE",
+        "name": "Zimbabwe"
+      }
+    ],
+    "id": "xoEXmPu0d0x"
+  },
+  "OH AH CC List Of Diseases": {
+    "name": "OH AH CC List Of Diseases",
+    "options": [
+      {
+        "code": "AHTXAdenov",
+        "name": "Adenovirus"
+      },
+      {
+        "code": "AHTXAfrica",
+        "name": "African Swine Fever"
+      },
+      {
+        "code": "AHTXAnapla",
+        "name": "Anaplasmosis"
+      },
+      {
+        "code": "AHTXAnimal",
+        "name": "Animal bites"
+      },
+      {
+        "code": "AHTXAnthra",
+        "name": "Anthrax"
+      },
+      {
+        "code": "AHTXBabesi",
+        "name": "Babesiosis"
+      },
+      {
+        "code": "AHTXBlackQ",
+        "name": "Black Quarter"
+      },
+      {
+        "code": "AHTXBovine",
+        "name": "Bovine Tuberculosis"
+      },
+      {
+        "code": "AHTXBrucel",
+        "name": "Brucellosis"
+      },
+      {
+        "code": "AHTXCampyl",
+        "name": "Campylobacter"
+      },
+      {
+        "code": "AHTXCanine",
+        "name": "Canine distemper"
+      },
+      {
+        "code": "AHTXCoccid",
+        "name": "Coccidiosis"
+      },
+      {
+        "code": "AHTXCBovine",
+        "name": "Contagious Bovine Pleuropneumonia"
+      },
+      {
+        "code": "AHTXCaprin",
+        "name": "Contagous Caprine Pleuropneumonia"
+      },
+      {
+        "code": "AHTXCorona",
+        "name": "Coronavirus_SARS-Cov2"
+      },
+      {
+        "code": "AHTXCrimea",
+        "name": "Crimean Congo hemorrhagic fever"
+      },
+      {
+        "code": "AHTXCystic",
+        "name": "Cysticercosis"
+      },
+      {
+        "code": "AHTXEastCo",
+        "name": "East Cost Fever"
+      },
+      {
+        "code": "AHTXEbolav",
+        "name": "Ebola virus disease"
+      },
+      {
+        "code": "AHTXElepha",
+        "name": "Elephant endotheliotropic herpes virus"
+      },
+      {
+        "code": "AHTXFascio",
+        "name": "Fasciola"
+      },
+      {
+        "code": "AHTXFootan",
+        "name": "Foot and Mouth Disease"
+      },
+      {
+        "code": "AHTXGiardi",
+        "name": "Giardia"
+      },
+      {
+        "code": "AHTXGumbor",
+        "name": "Gumboro Disease"
+      },
+      {
+        "code": "AHTXHantav",
+        "name": "Hantavirus"
+      },
+      {
+        "code": "AHTXHeartw",
+        "name": "Heart water"
+      },
+      {
+        "code": "AHTXHelmin",
+        "name": "Helminthiasis"
+      },
+      {
+        "code": "AHTXHemorr",
+        "name": "Hemorrhagic septicemia"
+      },
+      {
+        "code": "AHTXHerpes",
+        "name": "Herpes virus"
+      },
+      {
+        "code": "AHTXHighPa",
+        "name": "High Pathogenic Influenza virus"
+      },
+      {
+        "code": "AHTXHumanm",
+        "name": "Human metapneumovirus"
+      },
+      {
+        "code": "AHTXLassaf",
+        "name": "Lassa fever virus"
+      },
+      {
+        "code": "AHTXLumpyS",
+        "name": "Lumpy Skin Disease"
+      },
+      {
+        "code": "AHTXMange",
+        "name": "Mange"
+      },
+      {
+        "code": "AHTXMarbur",
+        "name": "Marburg Disease"
+      },
+      {
+        "code": "AHTXMastit",
+        "name": "Mastitis"
+      },
+      {
+        "code": "AHTXMeasle",
+        "name": "Measles"
+      },
+      {
+        "code": "AHTXMonkey",
+        "name": "Monkeypox"
+      },
+      {
+        "code": "AHTXNewCas",
+        "name": "New Castle Disease"
+      },
+      {
+        "code": "AHTXParvov",
+        "name": "Parvovirus"
+      },
+      {
+        "code": "AHTXPested",
+        "name": "Peste des Petits Ruminants"
+      },
+      {
+        "code": "AHTXRabies",
+        "name": "Rabies"
+      },
+      {
+        "code": "AHTXRespir",
+        "name": "Respiratory syncytial virus"
+      },
+      {
+        "code": "AHTXRiftVa",
+        "name": "Rift Valley Fever"
+      },
+      {
+        "code": "AHTXSalmon",
+        "name": "Salmonellosis"
+      },
+      {
+        "code": "AHTXSarcop",
+        "name": "Sarcoptes scabeie"
+      },
+      {
+        "code": "AHTXShigel",
+        "name": "Shigella"
+      },
+      {
+        "code": "AHTXSwineE",
+        "name": "Swine Erysipelas"
+      },
+      {
+        "code": "AHTXSwineL",
+        "name": "Swine Leptospirosis"
+      },
+      {
+        "code": "AHTXTrypan",
+        "name": "Trypanosomiasis"
+      },
+      {
+        "code": "AHTXTuberc",
+        "name": "Tuberculosis"
+      },
+      {
+        "code": "AHTXVarroa",
+        "name": "Varroa"
+      },
+      {
+        "code": "AHTXZika",
+        "name": "Zika"
+      },
+      {
+        "code": "Other",
+        "name": "Other"
+      }
+    ],
+    "id": "GjUB2pHlTNF"
+  },
+  "Signal Trigger": {
+    "name": "Signal Trigger",
+    "options": [
+      {
+        "code": "C16",
+        "name": "C16"
+      },
+      {
+        "code": "C01",
+        "name": "C01"
+      },
+      {
+        "code": "C02",
+        "name": "C02"
+      },
+      {
+        "code": "PH01",
+        "name": "PH01"
+      },
+      {
+        "code": "C04",
+        "name": "C04"
+      },
+      {
+        "code": "L02",
+        "name": "L02"
+      },
+      {
+        "code": "C05",
+        "name": "C05"
+      },
+      {
+        "code": "C03",
+        "name": "C03"
+      },
+      {
+        "code": "HL12",
+        "name": "HL12"
+      },
+      {
+        "code": "C06",
+        "name": "C06"
+      },
+      {
+        "code": "HL10",
+        "name": "HL10"
+      },
+      {
+        "code": "HL28",
+        "name": "HL28"
+      },
+      {
+        "code": "C07",
+        "name": "C07"
+      },
+      {
+        "code": "C09",
+        "name": "C09"
+      },
+      {
+        "code": "C10",
+        "name": "C10"
+      },
+      {
+        "code": "C11",
+        "name": "C11"
+      },
+      {
+        "code": "C08",
+        "name": "C08"
+      },
+      {
+        "code": "S04",
+        "name": "S04"
+      },
+      {
+        "code": "POE01",
+        "name": "POE01"
+      },
+      {
+        "code": "S02",
+        "name": "S02"
+      },
+      {
+        "code": "S03",
+        "name": "S03"
+      },
+      {
+        "code": "HL25",
+        "name": "HL25"
+      },
+      {
+        "code": "C12",
+        "name": "C12"
+      },
+      {
+        "code": "C15",
+        "name": "C15"
+      },
+      {
+        "code": "S07",
+        "name": "S07"
+      },
+      {
+        "code": "S06",
+        "name": "S06"
+      },
+      {
+        "code": "HF11",
+        "name": "HF11"
+      },
+      {
+        "code": "C13",
+        "name": "C13"
+      },
+      {
+        "code": "HL27",
+        "name": "HL27"
+      },
+      {
+        "code": "M03",
+        "name": "M03"
+      },
+      {
+        "code": "C14",
+        "name": "C14"
+      },
+      {
+        "code": "S12",
+        "name": "S12"
+      },
+      {
+        "code": "S11",
+        "name": "S11"
+      },
+      {
+        "code": "S09",
+        "name": "S09"
+      },
+      {
+        "code": "AF02",
+        "name": "AF02"
+      },
+      {
+        "code": "S05",
+        "name": "S05"
+      },
+      {
+        "code": "EF04",
+        "name": "EF04"
+      },
+      {
+        "code": "HF02",
+        "name": "HF02"
+      },
+      {
+        "code": "S01",
+        "name": "S01"
+      },
+      {
+        "code": "HF01",
+        "name": "HF01"
+      },
+      {
+        "code": "HL14",
+        "name": "HL14"
+      },
+      {
+        "code": "HF03",
+        "name": "HF03"
+      },
+      {
+        "code": "HL17",
+        "name": "HL17"
+      },
+      {
+        "code": "HF10",
+        "name": "HF10"
+      },
+      {
+        "code": "POE04",
+        "name": "POE04"
+      },
+      {
+        "code": "HF09",
+        "name": "HF09"
+      },
+      {
+        "code": "EF01",
+        "name": "EF01"
+      },
+      {
+        "code": "S10",
+        "name": "S10"
+      },
+      {
+        "code": "HF06",
+        "name": "HF06"
+      },
+      {
+        "code": "AF04",
+        "name": "AF04"
+      },
+      {
+        "code": "S08",
+        "name": "S08"
+      },
+      {
+        "code": "AF03",
+        "name": "AF03"
+      },
+      {
+        "code": "EF02",
+        "name": "EF02"
+      },
+      {
+        "code": "HF04",
+        "name": "HF04"
+      },
+      {
+        "code": "HF07",
+        "name": "HF07"
+      },
+      {
+        "code": "AF01",
+        "name": "AF01"
+      },
+      {
+        "code": "HF05",
+        "name": "HF05"
+      },
+      {
+        "code": "HL21",
+        "name": "HL21"
+      },
+      {
+        "code": "AF06",
+        "name": "AF06"
+      },
+      {
+        "code": "EF03",
+        "name": "EF03"
+      },
+      {
+        "code": "HF12",
+        "name": "HF12"
+      },
+      {
+        "code": "POE06",
+        "name": "POE06"
+      },
+      {
+        "code": "PH02",
+        "name": "PH02"
+      },
+      {
+        "code": "POE03",
+        "name": "POE03"
+      },
+      {
+        "code": "HL13",
+        "name": "HL13"
+      },
+      {
+        "code": "POE02",
+        "name": "POE02"
+      },
+      {
+        "code": "HF08",
+        "name": "HF08"
+      },
+      {
+        "code": "HL08",
+        "name": "HL08"
+      },
+      {
+        "code": "L03",
+        "name": "L03"
+      },
+      {
+        "code": "AF05",
+        "name": "AF05"
+      },
+      {
+        "code": "M01",
+        "name": "M01"
+      },
+      {
+        "code": "L01",
+        "name": "L01"
+      },
+      {
+        "code": "L04",
+        "name": "L04"
+      },
+      {
+        "code": "HL07",
+        "name": "HL07"
+      },
+      {
+        "code": "M02",
+        "name": "M02"
+      },
+      {
+        "code": "HL02",
+        "name": "HL02"
+      },
+      {
+        "code": "HL01",
+        "name": "HL01"
+      },
+      {
+        "code": "HL09",
+        "name": "HL09"
+      },
+      {
+        "code": "HL05",
+        "name": "HL05"
+      },
+      {
+        "code": "POE05",
+        "name": "POE05"
+      },
+      {
+        "code": "HL03",
+        "name": "HL03"
+      },
+      {
+        "code": "HL16",
+        "name": "HL16"
+      },
+      {
+        "code": "HL11",
+        "name": "HL11"
+      },
+      {
+        "code": "HL15",
+        "name": "HL15"
+      },
+      {
+        "code": "HL22",
+        "name": "HL22"
+      },
+      {
+        "code": "HL04",
+        "name": "HL04"
+      },
+      {
+        "code": "HL20",
+        "name": "HL20"
+      },
+      {
+        "code": "HL06",
+        "name": "HL06"
+      },
+      {
+        "code": "HL23",
+        "name": "HL23"
+      },
+      {
+        "code": "HL19",
+        "name": "HL19"
+      },
+      {
+        "code": "HL24",
+        "name": "HL24"
+      },
+      {
+        "code": "HL26",
+        "name": "HL26"
+      },
+      {
+        "code": "HL18",
+        "name": "HL18"
+      },
+      {
+        "code": "MS01",
+        "name": "MS01"
+      },
+      {
+        "code": "MS02",
+        "name": "MS02"
+      },
+      {
+        "code": "MS03",
+        "name": "MS03"
+      },
+      {
+        "code": "MS04",
+        "name": "MS04"
+      },
+      {
+        "code": "MS05",
+        "name": "MS05"
+      },
+      {
+        "code": "MS06",
+        "name": "MS06"
+      },
+      {
+        "code": "MS07",
+        "name": "MS07"
+      },
+      {
+        "code": "MS08",
+        "name": "MS08"
+      },
+      {
+        "code": "MS09",
+        "name": "MS09"
+      },
+      {
+        "code": "MS10",
+        "name": "MS10"
+      }
+    ],
+    "id": "P6bU0QEEMSL"
+  }
+}
