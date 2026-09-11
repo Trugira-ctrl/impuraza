@@ -3,7 +3,7 @@
 Monitor for Impuruza signals (events) that have NOT been marked Confirmed or
 Discarded yet - i.e. still "open" and awaiting verification.
 
-Intended to run every 5 minutes via an external scheduler (cron/launchd -
+Intended to run every 2 minutes via an external scheduler (cron/launchd -
 see docs/ops/scheduling.md). Each run:
 
   1. Pulls ALL events for the Impuruza program from /api/tracker/events.
@@ -21,7 +21,7 @@ see docs/ops/scheduling.md). Each run:
      --lookback-minutes. This is edge-triggered: a signal is isNew=true in
      exactly one run (the run whose window contains the moment it crossed
      the threshold), then isNew=false in every run after that - so an
-     alert fed by this field fires once per signal, not every 5 minutes
+     alert fed by this field fires once per signal, not every 2 minutes
      forever. `hoursOpen` (on every open signal, always) is what tells you
      its actual current age regardless of isNew.
   4. Prints a JSON report to stdout and logs a one-line summary.
@@ -108,7 +108,7 @@ REPORTER_VILLAGE_ATTR = "v24me96F6XA"     # "Village/Address" (free text)
 CLOSED_OUTCOMES = {"confirmed", "discarded"}  # normalized (stripped + lowercased) - option codes
 # have inconsistent casing/trailing whitespace in this instance (e.g. "Confirmed ")
 
-LOOKBACK_MINUTES_DEFAULT = 6   # meant to run every 5 min; 6-min lookback = 1-min overlap buffer
+LOOKBACK_MINUTES_DEFAULT = 3   # meant to run every 2 min; 3-min lookback = 1-min overlap buffer
 STALE_THRESHOLD_HOURS_DEFAULT = 2  # age at which an open signal is flagged "isNew" (just went stale)
 PAGE_SIZE = 200
 BATCH_SIZE = 100               # for comma-separated trackedEntities= / id:in:[] lookups
@@ -425,7 +425,7 @@ if __name__ == "__main__":
 # NOTE on scaling past a full sweep:
 # At ~900 events a full pull is sub-second and simplest/most correct (nothing
 # can silently fall through the cracks). If this grows large enough that a
-# full sweep every 5 minutes becomes expensive, switch to:
+# full sweep every 2 minutes becomes expensive, switch to:
 #   1. Persist {event_id: last_seen_outcome} to a local state file after each run.
 #   2. Query only `updatedAfter=<last run's server_now>` each run (still using
 #      server_now(), not the local clock, to avoid drift) for *changed* events.

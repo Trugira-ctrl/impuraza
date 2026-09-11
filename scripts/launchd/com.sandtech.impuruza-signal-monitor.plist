@@ -8,14 +8,18 @@
     <key>ProgramArguments</key>
     <array>
         <string>/Library/Developer/CommandLineTools/usr/bin/python3</string>
-        <string>/Users/uwonkundathierryrugira/NCDs/scripts/monitor_open_signals.py</string>
+        <string>/Users/uwonkundathierryrugira/Impuruza/scripts/monitor_open_signals.py</string>
     </array>
 
-    <!-- Every 5 minutes (300 seconds). launchd triggers this itself; the script
-         is single-shot (queries once and exits) rather than looping/sleeping,
-         so a crash or a stuck run doesn't accumulate - see project README. -->
+    <!-- Every 2 minutes (120 seconds), matching the cadence the Frappe sync needs
+         to pick up signal updates promptly. launchd triggers this itself; the
+         script is single-shot (queries once and exits) rather than looping/
+         sleeping, so a crash or a stuck run doesn't accumulate - see project
+         README. If you change this interval, change --lookback-minutes to match
+         (it must stay slightly LONGER than the interval, so consecutive runs
+         overlap and no signal slips through the gap between them). -->
     <key>StartInterval</key>
-    <integer>300</integer>
+    <integer>120</integer>
 
     <key>RunAtLoad</key>
     <false/>
@@ -29,10 +33,10 @@
     <key>StandardOutPath</key>
     <string>/dev/null</string>
     <key>StandardErrorPath</key>
-    <string>/Users/uwonkundathierryrugira/NCDs/data/logs/launchd.stderr.log</string>
+    <string>/Users/uwonkundathierryrugira/Impuruza/data/logs/launchd.stderr.log</string>
 
     <key>WorkingDirectory</key>
-    <string>/Users/uwonkundathierryrugira/NCDs</string>
+    <string>/Users/uwonkundathierryrugira/Impuruza</string>
 
     <!-- Optional: to scope this specific launchd job to one province instead of the whole
          country, uncomment and set PROVINCE (overrides any Province= in .env). To run

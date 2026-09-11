@@ -1,10 +1,19 @@
-# cbs2.moh.gov.rw DHIS2 Tracker Explorer
+# Impuruza signal monitor (DHIS2 → Frappe)
 
-A small reusable toolkit for exploring the DHIS2 Tracker API at
-`https://cbs2.moh.gov.rw` (Rwanda MoH). See [`docs/API_NOTES.md`](docs/API_NOTES.md)
-for what was found: this is the **"Impuruza"** community event-based
-surveillance (CEBS) program, not an NCD program — it tracks lookout/reporter
-registrations and the outbreak/health-event signals they report.
+Monitors the **Impuruza** community event-based surveillance (CEBS) program on
+`https://cbs2.moh.gov.rw` (Rwanda MoH DHIS2) for signals that have been sitting
+**open/pending for more than 2 hours** — i.e. reported by a community lookout but
+not yet marked Confirmed or Discarded.
+
+This repo is deliberately scoped to that job. It is the DHIS2-side half of a
+planned integration: the monitor identifies stale open signals, and a Frappe
+system (to be built) turns them into tickets and keeps them in sync. See
+[Planned Frappe integration](#planned-frappe-integration) for the contract
+between the two.
+
+See [`docs/API_NOTES.md`](docs/API_NOTES.md) for the full write-up of what this
+program actually is — tracked entities are lookouts/reporters, not patients, and
+the folder name "NCD" it was originally found under is misleading.
 
 ## Setup
 
@@ -12,98 +21,126 @@ registrations and the outbreak/health-event signals they report.
 pip install -r requirements.txt
 ```
 
-Put credentials in `.env` (already gitignored):
+Credentials in `.env` (gitignored):
 
 ```
 Username=your_username
 Password=your_password
 ```
 
-## Usage
+Then build the metadata cache — **required once before the monitor will run**
+(it reads option-set labels and province org unit IDs from here):
 
 ```bash
-# 1. Cache program schema, option sets, org unit levels (safe to commit — no personal data)
 python3 scripts/fetch_metadata.py
-
-# 2. Pull tracked entities and decode IDs -> human labels (writes to data/samples/, gitignored - contains PII)
-python3 scripts/fetch_tracked_entities.py --pages 1 --page-size 50
-
-# Fetch everything (48k+ records, ~489 pages at page-size 100) - slow, be deliberate
-python3 scripts/fetch_tracked_entities.py --all
 ```
 
-Or use the client directly:
-
-```python
-from src.dhis2_client import DHIS2Client
-
-client = DHIS2Client()
-print(client.system_info())
-
-for te in client.iter_tracked_entities(
-    program="oWvNtR6iP8p", org_units="Hjw70Lodtf2", max_pages=1
-):
-    print(te)
-```
-
-## Monitoring open (unconfirmed) signals
-
-`scripts/monitor_open_signals.py` checks every event in the program and
-reports which ones have no "Signal Verification Outcome" yet (neither
-Confirmed nor Discarded). It's meant to run every 5 minutes via an external
-scheduler - see [`docs/ops/scheduling.md`](docs/ops/scheduling.md) for the
-ready-made macOS launchd job (and a cron one-liner for Linux).
+## Running the monitor
 
 ```bash
-python3 scripts/monitor_open_signals.py                            # nationwide, default 2h staleness threshold
-python3 scripts/monitor_open_signals.py --stale-threshold-hours 6   # alert at 6h old instead of 2h
-PROVINCE=South python3 scripts/monitor_open_signals.py              # scope to one province only
+python3 scripts/monitor_open_signals.py                            # nationwide, 2h staleness threshold
+python3 scripts/monitor_open_signals.py --stale-threshold-hours 6   # alert at 6h instead
+python3 scripts/monitor_open_signals.py --verbose                   # debug logging
+PROVINCE=South python3 scripts/monitor_open_signals.py              # scope to one province
 ```
 
-Each open signal carries `hoursOpen` (its current age) and `isNew` -
-`isNew` is **edge-triggered**: true only in the single run whose 5-minute
-cycle catches the exact moment a still-open signal crosses
-`--stale-threshold-hours` (default 2h). It's false both before that (too
-young to alert on) and after (already alerted on an earlier run) - so
-wiring an alert off `isNew` fires once per signal, not every 5 minutes
-forever for the same backlog.
+Each run pulls every event in the program (~870 today, sub-second), filters to
+those with no Signal Verification Outcome, and writes a report.
 
-Org unit scope defaults to nationwide. Set `Province=<name>` in `.env` (or a
-`PROVINCE` process env var, which takes precedence) to restrict to one
-province - accepts either real org unit names (East/Kigali City/North/South/
-West) or the CR_Province-style labels (Eastern/Kigali/Northern/Southern/
-Western), case-insensitive. Requires `provinces.json` from
-`fetch_metadata.py` to already be cached.
+**`isNew` is edge-triggered** — it's true only in the single run whose lookback
+window catches the exact moment a still-open signal crosses
+`--stale-threshold-hours` (default 2h). False before (too young) and false after
+(already fired). That's what makes it safe to create a Frappe ticket off
+`isNew: true` without generating a duplicate every 2 minutes for the same
+backlog. `hoursOpen` carries the signal's actual current age regardless.
 
-Output: `data/state/latest_open_signals.json` (always the current snapshot)
-and a one-line-per-run summary in `data/logs/open_signals_monitor.log`.
+Output:
+- `data/state/latest_open_signals.json` — current snapshot, overwritten each run.
+  **Contains real personal data** (reporter name/phone/location), chmod 0600.
+- `data/logs/open_signals_monitor.log` — one summary line per run, no PII.
 
-## Trying it in Postman
+Exit codes: `0` ok · `1` config error (bad credentials, missing metadata cache,
+unrecognized province) · `2` API/network error after retries.
 
-If you'd rather explore/test the API by hand than via the Python scripts, see
-[`postman/README.md`](postman/README.md) - a ready-made collection covering
-auth, program metadata, tracker data, and the signal-routing investigation,
-plus notes on two real gotchas (silent pagination truncation, server
-timezone) found while building this project.
+## Scheduling (every 2 minutes)
+
+The script is single-shot — one invocation, one query, exit. An external
+scheduler provides the cadence. A ready-made macOS launchd job (set to 120s) is
+at [`scripts/launchd/`](scripts/launchd/); a cron one-liner for Linux and the
+install/verify/uninstall steps are in
+[`docs/ops/scheduling.md`](docs/ops/scheduling.md).
+
+If you change the interval, change `--lookback-minutes` to match — it must stay
+slightly **longer** than the interval so consecutive runs overlap and no signal
+slips through the gap between them. Current defaults: 120s interval, 3-minute
+lookback.
+
+## Planned Frappe integration
+
+The intended flow, not yet built:
+
+1. Monitor runs every 2 minutes (above).
+2. Signals flagged `isNew: true` (open >2h) → **create a ticket in Frappe**.
+3. Subsequent runs detect changes to those signals → **update the Frappe ticket**.
+4. A signal that gets Confirmed or Discarded → **close the Frappe ticket**.
+
+**The contract.** Each entry in `openSignals[]` carries:
+
+| Field | Use in Frappe |
+|---|---|
+| `event` | DHIS2 event UID — **use as the ticket's external/idempotency key** so re-runs don't duplicate tickets |
+| `isNew` | Create-ticket trigger (fires exactly once per signal) |
+| `hoursOpen` | Current age, for SLA/escalation display |
+| `updatedAt` | DHIS2-side last-modified, for change detection |
+| `occurredAt` | When the signal was reported |
+| `ebsType`, `signalTrigger`, `disease`, `orgUnitName` | Ticket body/classification |
+| `reporter{name, mobileNumber, province, district, sector, villageOrAddress}` | Who to contact — **PII, see Privacy below** |
+
+**Three gaps to close before this works end-to-end** (none are built yet):
+
+- **The existing backlog will never fire `isNew`.** As of the last run there are
+  **752 open signals, and `isNew` is true for zero of them** — the youngest has
+  been open 25.9 hours, the oldest 8,123 (~11 months). They all crossed the 2h
+  threshold *before* the monitor was watching, so by the edge-triggered
+  definition they never "cross" it again. A Frappe sync built only on
+  `isNew: true` would create **no tickets at all** and silently ignore the
+  entire backlog. It needs a separate one-off backfill (create tickets for
+  everything currently in `openSignals[]`), with `isNew` handling only new
+  arrivals from then on.
+- **Closing tickets.** The monitor only reports what's currently *open*. A
+  signal that gets verified simply disappears from `openSignals[]` — there's no
+  "these just closed" list. The sync will need to either diff against the
+  previous run or have Frappe reconcile its open tickets against the current
+  snapshot by `event` ID.
+- **Detecting updates.** `latest_open_signals.json` is overwritten each run with
+  no history, so there's currently nothing to diff `updatedAt` against. Either
+  keep a prior-run copy, or let Frappe compare against the `updatedAt` it last
+  stored per ticket.
+
+Nothing in this repo writes to DHIS2 — `src/dhis2_client.py` only implements
+`GET`. Note that the `SandTechPheoc` account nonetheless *holds* write and
+cascade-delete authorities on the live instance; worth scoping that down to
+read-only with the DHIS2 administrators, since this tooling never needs them.
 
 ## Layout
 
 ```
-src/dhis2_client.py             reusable API client (.env-based auth)
-scripts/fetch_metadata.py       caches program/option-set/org-unit schema -> data/metadata/
-scripts/fetch_tracked_entities.py   pulls + decodes tracker records -> data/samples/ (gitignored)
-scripts/monitor_open_signals.py     every-5-min check for unconfirmed/undiscarded signals
-scripts/launchd/                 macOS launchd job definition for the monitor
-data/metadata/                  cached schema JSON (safe to commit)
-data/samples/                   raw/decoded tracked-entity pulls (gitignored - contains PII)
-data/state/, data/logs/         monitor's runtime output (gitignored)
-docs/API_NOTES.md               full write-up of the program structure, option sets, scale, endpoints
-docs/ops/scheduling.md          how to schedule the monitor every 5 minutes
+src/dhis2_client.py               reusable API client (.env auth, pagination, GET only)
+scripts/fetch_metadata.py         caches program/option-set/org-unit schema -> data/metadata/
+scripts/monitor_open_signals.py   the monitor: open signals >2h, edge-triggered isNew
+scripts/launchd/                  macOS launchd job (120s interval)
+data/metadata/                    cached schema JSON (committed - no personal data)
+data/state/, data/logs/           monitor runtime output (gitignored; state contains PII)
+docs/API_NOTES.md                 program structure, option sets, scale, endpoints, gotchas
+docs/ops/scheduling.md            how to schedule the monitor every 2 minutes
 ```
 
 ## Privacy
 
-Tracked-entity records contain real names, phone numbers, and addresses of
-community disease-surveillance reporters. Never commit `data/samples/` or
-paste raw records into chat/tickets — see the Privacy section in
+Tracked-entity records — and therefore `data/state/latest_open_signals.json` and
+anything the Frappe integration carries downstream — contain **real names, phone
+numbers and addresses of community disease-surveillance reporters**. Never commit
+`data/state/`, never paste raw records into chat/tickets beyond what's needed, and
+apply the same access controls to any Frappe ticket, log aggregator or alerting
+integration that you'd apply to the source system. See the Privacy section in
 [`docs/API_NOTES.md`](docs/API_NOTES.md).

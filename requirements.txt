@@ -1,3 +1,1 @@
 requests>=2.31
-pandas>=2.0     # scripts/one_health_correlation.py only
-numpy>=1.24     # scripts/one_health_correlation.py only
