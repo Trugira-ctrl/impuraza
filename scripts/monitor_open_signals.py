@@ -66,6 +66,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 import requests
+from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 from dhis2_client import DHIS2Client, load_env  # noqa: E402
@@ -195,26 +196,25 @@ def resolve_org_unit_scope() -> tuple[str, str]:
         raise RuntimeError(f"Province {canonical_name!r} not found in data/metadata/provinces.json.")
     return org_unit_id, canonical_name
 
-
-def fetch_all_events(client: DHIS2Client, org_unit: str) -> list[dict]:
+def fetch_all_events(client: DHIS2Client, org_unit: str, occurred_after: datetime | None = None) -> list[dict]:
     """Pull every event in the program under the given org unit subtree (paginated).
-    See module docstring re: scale."""
+    If occurred_after is given, only events occurring on/after that date are fetched
+    (filtered server-side by DHIS2, not in Python) — see module docstring re: scale."""
     fields = "event,trackedEntity,orgUnit,status,occurredAt,updatedAt,dataValues[dataElement,value]"
+    params = {
+        "program": PROGRAM_ID,
+        "orgUnit": org_unit,
+        "ouMode": "DESCENDANTS",
+        "fields": fields,
+        "pageSize": PAGE_SIZE,
+    }
+    if occurred_after is not None:
+        params["occurredAfter"] = occurred_after.strftime("%Y-%m-%d")
+
     events = []
     page = 1
     while True:
-        data = get_with_retries(
-            client,
-            "/api/tracker/events",
-            {
-                "program": PROGRAM_ID,
-                "orgUnit": org_unit,
-                "ouMode": "DESCENDANTS",
-                "fields": fields,
-                "pageSize": PAGE_SIZE,
-                "page": page,
-            },
-        )
+        data = get_with_retries(client, "/api/tracker/events", {**params, "page": page})
         batch = data.get("events", [])
         events.extend(batch)
         logger.debug("Fetched page %d: %d events", page, len(batch))
@@ -222,6 +222,33 @@ def fetch_all_events(client: DHIS2Client, org_unit: str) -> list[dict]:
             break
         page += 1
     return events
+
+# def fetch_all_events(client: DHIS2Client, org_unit: str) -> list[dict]:
+#     """Pull every event in the program under the given org unit subtree (paginated).
+#     See module docstring re: scale."""
+#     fields = "event,trackedEntity,orgUnit,status,occurredAt,updatedAt,dataValues[dataElement,value]"
+#     events = []
+#     page = 1
+#     while True:
+#         data = get_with_retries(
+#             client,
+#             "/api/tracker/events",
+#             {
+#                 "program": PROGRAM_ID,
+#                 "orgUnit": org_unit,
+#                 "ouMode": "DESCENDANTS",
+#                 "fields": fields,
+#                 "pageSize": PAGE_SIZE,
+#                 "page": page,
+#             },
+#         )
+#         batch = data.get("events", [])
+#         events.extend(batch)
+#         logger.debug("Fetched page %d: %d events", page, len(batch))
+#         if len(batch) < PAGE_SIZE:
+#             break
+#         page += 1
+#     return events
 
 
 def fetch_reporter_attributes(client: DHIS2Client, tracked_entity_ids: list[str]) -> dict[str, dict]:
@@ -351,12 +378,24 @@ def analyze(events: list[dict], now: datetime, lookback_minutes: int, stale_thre
         "openSignals": open_signals,
     }
 
+def default_since_cutoff(reference: datetime | None = None) -> datetime:
+    """Most recent August 1st on/before the reference date."""
+    reference = reference or datetime.now()
+    year = reference.year if reference.month >= 8 else reference.year - 1
+    return datetime(year, 8, 1)
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--lookback-minutes", type=int, default=LOOKBACK_MINUTES_DEFAULT)
     parser.add_argument("--stale-threshold-hours", type=int, default=STALE_THRESHOLD_HOURS_DEFAULT)
     parser.add_argument("--verbose", action="store_true")
+    parser.add_argument(
+        "--since-date",
+        type=str,
+        default=None,
+        help="Only include events on/after this date (YYYY-MM-DD). Defaults to the most recent August 1st.",
+    )
     args = parser.parse_args()
 
     setup_logging(args.verbose)
@@ -377,14 +416,33 @@ def main() -> None:
         logger.error("Credential error: %s", e)
         sys.exit(1)
 
+    if args.since_date:
+        try:
+            since_cutoff = datetime.strptime(args.since_date, "%Y-%m-%d")
+        except ValueError:
+            logger.error("Invalid --since-date, expected YYYY-MM-DD")
+            sys.exit(1)
+    else:
+        since_cutoff = default_since_cutoff()
+
     try:
         now = server_now(client)
-        events = fetch_all_events(client, org_unit)
+        events = fetch_all_events(client, org_unit, occurred_after=since_cutoff)
     except RuntimeError as e:
         logger.error("Giving up: %s", e)
         sys.exit(2)
 
+    logger.info("Fetched %d events occurring on/after %s", len(events), since_cutoff.date())
     report = analyze(events, now, args.lookback_minutes, args.stale_threshold_hours)
+
+    # try:
+    #     now = server_now(client)
+    #     events = fetch_all_events(client, org_unit)
+    # except RuntimeError as e:
+    #     logger.error("Giving up: %s", e)
+    #     sys.exit(2)
+
+    # report = analyze(events, now, args.lookback_minutes, args.stale_threshold_hours)
     report["scope"] = scope_label
     logger.info(
         "[%s] Scanned %d events: %d open (%d just crossed %dh threshold, %d already stale)",
@@ -405,6 +463,12 @@ def main() -> None:
     write_latest_snapshot(report)
     print(json.dumps(report, indent=2))
 
+    try:
+        send_report(report)
+    except RuntimeError as e:
+        logger.error("Giving up sending report: %s", e)
+        sys.exit(2)
+
 
 def write_latest_snapshot(report: dict) -> None:
     """Atomically overwrite the 'current state' file each run (safe for concurrent readers,
@@ -417,6 +481,22 @@ def write_latest_snapshot(report: dict) -> None:
     tmp_path.write_text(json.dumps(report, indent=2))
     os.chmod(tmp_path, 0o600)
     tmp_path.replace(LATEST_SNAPSHOT_PATH)
+
+
+def send_report(report: dict, timeout: int = 15) -> None:
+    """POST the report to the webhook URL configured in .env / the environment."""
+    load_dotenv()
+    url = os.getenv("INTEGRATION_URL")
+    if not url:
+        raise RuntimeError("INTEGRATION_URL is not set in the environment/.env file")
+
+    try:
+        response = requests.post(url, json=report, timeout=timeout)
+        response.raise_for_status()
+    except requests.RequestException as e:
+        raise RuntimeError(f"Failed to send report to {url}: {e}") from e
+
+    logger.info("Report sent to %s (status %d)", url, response.status_code)
 
 
 if __name__ == "__main__":
