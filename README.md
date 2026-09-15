@@ -75,14 +75,47 @@ slightly **longer** than the interval so consecutive runs overlap and no signal
 slips through the gap between them. Current defaults: 120s interval, 3-minute
 lookback.
 
+## Event lookup API
+
+`api/main.py` — a small FastAPI service for looking up one Impuruza event by
+ID and getting it back fully decoded (data element IDs resolved to
+human-readable names, option codes resolved to labels).
+
+```bash
+python3 scripts/fetch_metadata.py            # once, if not already cached
+uvicorn api.main:app --host 127.0.0.1 --port 8000
+
+curl http://127.0.0.1:8000/events/<event_id>
+```
+
+**Localhost only** — enforced twice: bind uvicorn to `127.0.0.1` (never
+`0.0.0.0`), and a middleware in `api/main.py` rejects any request whose client
+IP isn't loopback regardless of how the process was started. See that file's
+docstring for the caveat about not putting this behind a reverse proxy without
+revisiting that check.
+
+Scoped to the Impuruza program only — an event ID from a different program on
+the same DHIS2 instance, or one that doesn't exist, both return 404. No PII:
+an event's own fields never include the reporting lookout's name/phone/
+address (that lives on the tracked entity, which this endpoint never
+fetches).
+
 ## Planned Frappe integration
 
-The intended flow, not yet built:
+The intended flow:
 
 1. Monitor runs every 2 minutes (above).
 2. Signals flagged `isNew: true` (open >2h) → **create a ticket in Frappe**.
 3. Subsequent runs detect changes to those signals → **update the Frappe ticket**.
 4. A signal that gets Confirmed or Discarded → **close the Frappe ticket**.
+
+**Partially built.** `monitor_open_signals.py` now POSTs its full report to
+`INTEGRATION_URL` (`.env`) via `send_report()` at the end of every run — steps
+2–4's create/update/close logic isn't implemented on either side yet, but the
+transport exists. Read that function's docstring before setting
+`INTEGRATION_URL`: it ships the same PII described below (reporter name/phone/
+address for every open signal), unauthenticated, to whatever URL you put
+there.
 
 **The contract.** Each entry in `openSignals[]` carries:
 
@@ -126,9 +159,11 @@ read-only with the DHIS2 administrators, since this tooling never needs them.
 
 ```
 src/dhis2_client.py               reusable API client (.env auth, pagination, GET only)
+src/decode.py                     data element ID / option code -> human-readable label decoding
 scripts/fetch_metadata.py         caches program/option-set/org-unit schema -> data/metadata/
-scripts/monitor_open_signals.py   the monitor: open signals >2h, edge-triggered isNew
+scripts/monitor_open_signals.py   the monitor: open signals >2h, edge-triggered isNew, POSTs to Frappe
 scripts/launchd/                  macOS launchd job (120s interval)
+api/main.py                       FastAPI event-lookup service (localhost only - see above)
 data/metadata/                    cached schema JSON (committed - no personal data)
 data/state/, data/logs/           monitor runtime output (gitignored; state contains PII)
 docs/API_NOTES.md                 program structure, option sets, scale, endpoints, gotchas

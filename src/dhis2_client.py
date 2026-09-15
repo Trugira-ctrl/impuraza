@@ -95,6 +95,19 @@ class DHIS2Client:
     def org_unit(self, org_unit_id: str, fields: str = "id,name,level,path,parent[id,name]") -> dict:
         return self.get(f"/api/organisationUnits/{org_unit_id}.json", {"fields": fields})
 
+    def get_event(
+        self,
+        event_id: str,
+        fields: str = (
+            "event,program,programStage,trackedEntity,orgUnit,status,occurredAt,updatedAt,"
+            "dataValues[dataElement,value]"
+        ),
+    ) -> dict:
+        """One event by its own UID, via the tracker API's single-event path (not a
+        paginated /api/tracker/events?event= filter - this hits the resource directly).
+        Raises requests.exceptions.HTTPError (404) if the ID doesn't exist."""
+        return self.get(f"/api/tracker/events/{event_id}", {"fields": fields})
+
     def tracked_entities_page(
         self,
         program: str,
