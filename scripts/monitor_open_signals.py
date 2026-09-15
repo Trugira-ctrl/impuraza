@@ -6,12 +6,14 @@ Discarded yet - i.e. still "open" and awaiting verification.
 Intended to run every 2 minutes via an external scheduler (cron/launchd -
 see docs/ops/scheduling.md). Each run:
 
-  1. Pulls ALL events for the Impuruza program from /api/tracker/events.
-     This is currently cheap (~900 events total, sub-second query - see
-     "Scale" note in docs/API_NOTES.md). If the program grows into the tens
-     of thousands of events, switch to incremental sync via `updatedAfter`
-     + a local state file instead of a full sweep - see NOTE at the bottom
-     of this file.
+  1. Pulls events for the Impuruza program from /api/tracker/events,
+     filtered server-side to occurredAt on/after --since-date (default: the
+     most recent August 1st - see default_since_cutoff()). This is currently
+     cheap regardless (~900 events total since program start, sub-second
+     query - see "Scale" note in docs/API_NOTES.md). If the program grows
+     into the tens of thousands of events, switch to incremental sync via
+     `updatedAfter` + a local state file instead - see NOTE at the bottom of
+     this file.
   2. Filters to events whose "Signal Verification Outcome" is neither
      Confirmed nor Discarded ("open").
   3. Flags each open signal "isNew" if it just crossed the staleness
@@ -223,34 +225,6 @@ def fetch_all_events(client: DHIS2Client, org_unit: str, occurred_after: datetim
         page += 1
     return events
 
-# def fetch_all_events(client: DHIS2Client, org_unit: str) -> list[dict]:
-#     """Pull every event in the program under the given org unit subtree (paginated).
-#     See module docstring re: scale."""
-#     fields = "event,trackedEntity,orgUnit,status,occurredAt,updatedAt,dataValues[dataElement,value]"
-#     events = []
-#     page = 1
-#     while True:
-#         data = get_with_retries(
-#             client,
-#             "/api/tracker/events",
-#             {
-#                 "program": PROGRAM_ID,
-#                 "orgUnit": org_unit,
-#                 "ouMode": "DESCENDANTS",
-#                 "fields": fields,
-#                 "pageSize": PAGE_SIZE,
-#                 "page": page,
-#             },
-#         )
-#         batch = data.get("events", [])
-#         events.extend(batch)
-#         logger.debug("Fetched page %d: %d events", page, len(batch))
-#         if len(batch) < PAGE_SIZE:
-#             break
-#         page += 1
-#     return events
-
-
 def fetch_reporter_attributes(client: DHIS2Client, tracked_entity_ids: list[str]) -> dict[str, dict]:
     """Batch-fetch registration attributes (name, phone, home location) for a set of
     tracked entities (the community health workers / "lookouts" who reported each open
@@ -434,15 +408,6 @@ def main() -> None:
 
     logger.info("Fetched %d events occurring on/after %s", len(events), since_cutoff.date())
     report = analyze(events, now, args.lookback_minutes, args.stale_threshold_hours)
-
-    # try:
-    #     now = server_now(client)
-    #     events = fetch_all_events(client, org_unit)
-    # except RuntimeError as e:
-    #     logger.error("Giving up: %s", e)
-    #     sys.exit(2)
-
-    # report = analyze(events, now, args.lookback_minutes, args.stale_threshold_hours)
     report["scope"] = scope_label
     logger.info(
         "[%s] Scanned %d events: %d open (%d just crossed %dh threshold, %d already stale)",
@@ -484,7 +449,17 @@ def write_latest_snapshot(report: dict) -> None:
 
 
 def send_report(report: dict, timeout: int = 15) -> None:
-    """POST the report to the webhook URL configured in .env / the environment."""
+    """POST the report to the webhook URL configured in .env / the environment.
+
+    PRIVACY: by the time this runs, `report["openSignals"]` has already been
+    enriched (see enrich_with_reporter_details(), called earlier in main())
+    with each open signal's reporter name, phone number, and home province/
+    district/sector/village - REAL PERSONAL DATA. This function ships that
+    data, unauthenticated (plain requests.post, no signing/auth header), to
+    whatever INTEGRATION_URL points at. Apply the same access controls to
+    that endpoint you'd apply to the source system, and confirm it's using
+    TLS - this was merged without either being discussed. Flagged, not
+    changed, pending a decision from whoever owns the Frappe side."""
     load_dotenv()
     url = os.getenv("INTEGRATION_URL")
     if not url:
