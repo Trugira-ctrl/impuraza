@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+env/
 .DS_Store
 
 # Raw API pulls can contain personal data (names, phone numbers) - never commit these
