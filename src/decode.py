@@ -17,6 +17,18 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 METADATA_DIR = REPO_ROOT / "data" / "metadata"
 
 
+def build_program_names(metadata_dir: Path = METADATA_DIR) -> dict[str, str]:
+    """Returns {program UID: name, programStage UID: name} - both in one dict since
+    UIDs are globally unique, so there's no collision risk merging them. Cached locally
+    (data/metadata/program.json), so resolving these costs no extra API call, unlike
+    org unit names below."""
+    program = json.loads((metadata_dir / "program.json").read_text())
+    names = {program["id"]: program["name"]}
+    for stage in program.get("programStages", []):
+        names[stage["id"]] = stage["name"]
+    return names
+
+
 def build_field_maps(metadata_dir: Path = METADATA_DIR) -> tuple[dict, dict, dict]:
     """Returns (field_names, field_option_sets, option_code_labels):
     - field_names: data element/attribute ID -> human-readable name
@@ -58,16 +70,31 @@ def decode_value(field_id: str, raw_value, field_names: dict, field_option_sets:
     return label, raw_value
 
 
-def decode_event(event: dict, field_names: dict, field_option_sets: dict, option_code_labels: dict) -> dict:
+def decode_event(
+    event: dict,
+    field_names: dict,
+    field_option_sets: dict,
+    option_code_labels: dict,
+    program_names: dict | None = None,
+) -> dict:
     """Flattens one /api/tracker/events/{id} response into a single dict: event-level
     metadata (event UID, org unit, status, timestamps) plus every dataValue decoded to
     {human-readable field name: decoded value}. All keys the event actually carries end
     up as top-level keys in the returned dict - a field with no value on this particular
-    event simply doesn't appear (DHIS2 omits empty dataValues rather than sending nulls)."""
+    event simply doesn't appear (DHIS2 omits empty dataValues rather than sending nulls).
+
+    program/programStage are resolved to names via program_names (falls back to the raw
+    UID if the map is missing or doesn't cover it, rather than raising). event and
+    trackedEntity are deliberately left as UIDs - `event` is the record's own primary
+    key, and trackedEntity's human-readable name lives on PII this decoder never fetches
+    (see api/main.py's Privacy note). orgUnit is left as a UID too - resolving it to a
+    name needs a live API call this pure metadata-cache function can't make; see
+    api/main.py's get_event(), which adds an `orgUnitName` key after calling this."""
+    program_names = program_names or {}
     out = {
         "event": event.get("event"),
-        "program": event.get("program"),
-        "programStage": event.get("programStage"),
+        "program": program_names.get(event.get("program"), event.get("program")),
+        "programStage": program_names.get(event.get("programStage"), event.get("programStage")),
         "trackedEntity": event.get("trackedEntity"),
         "orgUnit": event.get("orgUnit"),
         "status": event.get("status"),
