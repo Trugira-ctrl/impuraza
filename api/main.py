@@ -84,8 +84,7 @@ from fastapi.responses import JSONResponse
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
 from decode import build_field_maps, build_program_names, decode_event  # noqa: E402
-from dhis2_client import DHIS2Client  # noqa: E4
-from decode import build_field_maps, build_program_names, decode_event  # noqa: E40202
+from dhis2_client import DHIS2Client  # noqa: E402
 
 load_dotenv()
 
@@ -207,6 +206,16 @@ def get_event(event_id: str) -> dict:
 
     field_names, field_option_sets, option_code_labels = _field_maps
     decoded = decode_event(event, field_names, field_option_sets, option_code_labels, _program_names)
+
+    # DHIS2 omits a dataValue entirely when it's never been set - it does not send it
+    # as null. For "Signal Verification Outcome" specifically, that means a still-open
+    # signal (never Confirmed or Discarded) has NO key at all in decode_event's output,
+    # rather than the key being present with a null value. A consumer checking this
+    # field to decide ticket status needs it to always be there, so it can tell "still
+    # open" (null) apart from "the DHIS2 response changed shape" (missing key). Force it
+    # to appear, defaulting to null when absent - same reasoning DHIS2 itself doesn't
+    # apply, so we apply it here instead.
+    decoded.setdefault("Signal Verification Outcome", None)
 
     # orgUnit name needs a live lookup (not in the local metadata cache) - if it fails,
     # degrade to just the UID rather than failing the whole request over a display detail.
