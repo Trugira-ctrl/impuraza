@@ -83,8 +83,9 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
-from decode import build_field_maps, decode_event  # noqa: E402
-from dhis2_client import DHIS2Client  # noqa: E402
+from decode import build_field_maps, build_program_names, decode_event  # noqa: E402
+from dhis2_client import DHIS2Client  # noqa: E4
+from decode import build_field_maps, build_program_names, decode_event  # noqa: E40202
 
 load_dotenv()
 
@@ -137,6 +138,7 @@ TRUSTED_NETWORKS = _load_trusted_networks()
 
 _client: DHIS2Client | None = None
 _field_maps: tuple[dict, dict, dict] | None = None
+_program_names: dict | None = None
 
 
 def _is_trusted(client_host: str | None) -> bool:
@@ -156,9 +158,10 @@ async def lifespan(app: FastAPI):
     instance, reused), and avoids re-reading data/metadata/*.json on every hit.
     A missing/bad .env or missing metadata cache fails startup outright, rather
     than accepting requests this service could never actually serve."""
-    global _client, _field_maps
+    global _client, _field_maps, _program_names
     _client = DHIS2Client()
     _field_maps = build_field_maps()
+    _program_names = build_program_names()
     yield
 
 
@@ -203,4 +206,15 @@ def get_event(event_id: str) -> dict:
         raise HTTPException(status_code=404, detail=f"No event found with ID {event_id!r}")
 
     field_names, field_option_sets, option_code_labels = _field_maps
-    return decode_event(event, field_names, field_option_sets, option_code_labels)
+    decoded = decode_event(event, field_names, field_option_sets, option_code_labels, _program_names)
+
+    # orgUnit name needs a live lookup (not in the local metadata cache) - if it fails,
+    # degrade to just the UID rather than failing the whole request over a display detail.
+    org_unit_id = decoded.get("orgUnit")
+    if org_unit_id:
+        try:
+            decoded["orgUnitName"] = _client.org_unit(org_unit_id, fields="id,name").get("name")
+        except requests_lib.exceptions.RequestException:
+            decoded["orgUnitName"] = None
+
+    return decoded
